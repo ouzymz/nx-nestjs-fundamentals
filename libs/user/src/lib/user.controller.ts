@@ -1,15 +1,25 @@
-import { Controller } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  ParseIntPipe,
+  Patch,
+  Post,
+  Query,
+  ValidationPipe,
+} from '@nestjs/common';
 import { UserService } from './user.service';
+import { CreateUserDto } from './dto/create-user.dto';
+import { UpdateUserDto } from './dto/update-user.dto';
+import { PaginationQueryDto } from '@nestjs-fundamentals-boiler-temple/common';
 
 @Controller('user')
 export class UserController {
   constructor(private readonly userService: UserService) {}
   @Get()
-  async findAll(
-    @Protocol('https') protocol: string,
-    @Query() paginationQuery: PaginationQueryDto
-  ) {
-    console.log(protocol);
+  async findAll(@Query() paginationQuery: PaginationQueryDto) {
     // await new Promise(resolve => setTimeout(resolve, 5000));
     // const { limit, offset } = paginationQuery;
     // return `This action returns all coffees. Limit ${limit}, ${offset}`;
@@ -25,19 +35,19 @@ export class UserController {
   }
 
   @Post()
-  create(@Body() createCoffeeDto: CreateCoffeeDto) {
+  create(@Body() createUserDto: CreateUserDto) {
     // return body;
     // return `This action creates a coffee`;
-    return this.userService.create(createCoffeeDto);
+    return this.userService.create(createUserDto);
   }
 
   @Patch(':id')
   update(
     @Param('id') id: string,
-    @Body(ValidationPipe) updateCoffeeDto: UpdateCoffeeDto
+    @Body(ValidationPipe) updateUserDto: UpdateUserDto
   ) {
     // return `This action updates #${id} coffee`;
-    return this.userService.update(id, updateCoffeeDto);
+    return this.userService.update(id, updateUserDto);
   }
 
   @Delete(':id')
