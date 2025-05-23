@@ -1,19 +1,25 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Column,
+  Entity,
+  JoinTable,
+  ManyToMany,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
+import { Nationality } from './nationality.entity';
 
-@Entity()
+@Entity('User')
 export class User {
   @PrimaryGeneratedColumn()
   id!: number;
 
   @Column()
-  title!: string;
-
-  @Column({ nullable: true })
-  description!: string;
-
+  name!: string;
   @Column()
-  brand!: string;
+  sirname!: string;
 
-  @Column({ default: 0 })
-  recommendations!: number;
+  @JoinTable()
+  @ManyToMany((type) => Nationality, (nationality) => nationality.users, {
+    cascade: true, // ['insert']
+  })
+  nationality!: Nationality[];
 }
