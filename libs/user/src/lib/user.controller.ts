@@ -8,6 +8,7 @@ import {
   Patch,
   Post,
   Query,
+  UsePipes,
   ValidationPipe,
 } from '@nestjs/common';
 import { UserService } from './user.service';
@@ -18,6 +19,8 @@ import { PaginationQueryDto } from '@nestjs-fundamentals-boiler-temple/common';
 @Controller('user')
 export class UserController {
   constructor(private readonly userService: UserService) {}
+
+  @UsePipes(ValidationPipe)
   @Get()
   async findAll(@Query() paginationQuery: PaginationQueryDto) {
     // await new Promise(resolve => setTimeout(resolve, 5000));

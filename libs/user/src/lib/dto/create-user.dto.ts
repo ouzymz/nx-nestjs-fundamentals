@@ -8,5 +8,5 @@ export class CreateUserDto {
   sirname!: string;
 
   @IsString({ each: true })
-  nationality!: string[];
+  nationalities!: string[];
 }
