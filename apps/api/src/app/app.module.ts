@@ -6,6 +6,7 @@ import appConfig from './config/app.config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { CommonModule } from '@nestjs-fundamentals-boiler-temple/common';
 import { UserModule } from '@nestjs-fundamentals-boiler-temple/user';
+import { UserRatingModule } from '@nestjs-fundamentals-boiler-temple/user-rating';
 @Module({
   imports: [
     ConfigModule.forRoot({
@@ -36,7 +37,9 @@ import { UserModule } from '@nestjs-fundamentals-boiler-temple/user';
               synchronize: true, // your entities will be synced with the database (ORM will map entity definitions to corresponding SQL tabled), every time you run the application (recommended: disable in the production)
             },
     }),
+
     CommonModule,
+    UserRatingModule,
     UserModule,
   ],
   controllers: [AppController],

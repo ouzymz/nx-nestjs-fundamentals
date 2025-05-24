@@ -16,7 +16,13 @@
     "baseUrl": ".",
     "paths": {
       "@nestjs-fundamentals-boiler-temple/common": ["libs/common/src/index.ts"],
-      "@nestjs-fundamentals-boiler-temple/user": ["libs/user/src/index.ts"]
+      "@nestjs-fundamentals-boiler-temple/database": [
+        "libs/database/src/index.ts"
+      ],
+      "@nestjs-fundamentals-boiler-temple/user": ["libs/user/src/index.ts"],
+      "@nestjs-fundamentals-boiler-temple/user-rating": [
+        "libs/user-rating/src/index.ts"
+      ]
     }
   },
   "exclude": ["node_modules", "tmp"]
