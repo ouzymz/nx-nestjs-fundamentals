@@ -18,7 +18,9 @@ import {
   PaginationQueryDto,
   Public,
 } from '@nestjs-fundamentals-boiler-temple/common';
+import { ApiForbiddenResponse, ApiResponse, ApiTags } from '@nestjs/swagger';
 
+@ApiTags('user') //To group endpoints in swagger.
 @Controller('user')
 export class UserController {
   constructor(private readonly userService: UserService) {}
@@ -33,6 +35,7 @@ export class UserController {
     return this.userService.findAll(paginationQuery);
   }
 
+  @ApiResponse({ status: 403, description: 'Forbidden.' }) //to configure swagger response section
   @Get(':id')
   findOne(@Param('id', ParseIntPipe) id: number) {
     console.log(id);
@@ -41,6 +44,7 @@ export class UserController {
     return this.userService.findOne(String(id)); // "" + id;
   }
 
+  @ApiForbiddenResponse({ description: 'Forbidden.' }) //to configure swagger response section
   @Post()
   create(@Body() createUserDto: CreateUserDto) {
     // return body;

@@ -1,7 +1,8 @@
 import { Body, Controller, Get, Param, Post } from '@nestjs/common';
 import { CreateUserRatingDto } from './dtos/create-user-rating.dto';
 import { UserRatingService } from './user-rating.service';
-
+import { ApiTags } from '@nestjs/swagger';
+@ApiTags('user-rating')
 @Controller('user-rating')
 export class UserRatingController {
   constructor(private readonly userRatingService: UserRatingService) {}
