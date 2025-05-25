@@ -12,6 +12,7 @@ A modern, production-ready NestJS boilerplate built with Nx workspace. This temp
 - **Testing**: Jest setup for unit and e2e testing
 - **Code Quality**: ESLint and Prettier for consistent code style
 - **TypeScript**: Latest version with strict type checking
+- **API Documentation**: Swagger/OpenAPI integration
 
 ## Prerequisites
 
@@ -37,12 +38,12 @@ npm install
 3. Set up environment variables:
 
 ```bash
-cp apps/api/.env
+cp apps/api/.env.example apps/api/.env
 ```
 
 4. Update the `.env` file with your database credentials and other configurations.
 
-## 🚀 Development
+## Development
 
 To start the development server:
 
@@ -51,6 +52,21 @@ npx nx serve api
 ```
 
 The API will be available at `http://localhost:3000`.
+
+### API Documentation
+
+The API documentation is available through Swagger UI. Once the development server is running, you can access it at:
+
+```
+http://localhost:3000/api
+```
+
+The Swagger documentation provides:
+
+- Interactive API documentation
+- Request/response schemas
+- Authentication requirements
+- API testing interface
 
 ## Testing
 
@@ -82,7 +98,6 @@ docker-compose up --build
 │   └── api-e2e/       # End-to-end tests
 ├── libs/              # Shared libraries
 ├── docker/           # Docker configuration
-
 ```
 
 ## Available Scripts
@@ -98,10 +113,11 @@ docker-compose up --build
 - [NestJS Documentation](https://docs.nestjs.com/)
 - [Nx Documentation](https://nx.dev/)
 - [TypeORM Documentation](https://typeorm.io/)
+- [Swagger/OpenAPI Documentation](https://docs.nestjs.com/openapi/introduction)
 
 ## Contributing
 
-Ffeel free to submit a Pull Request.
+Feel free to submit a Pull Request.
 
 ## License
 
