@@ -1,4 +1,4 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { Inject, Injectable, NotFoundException } from '@nestjs/common';
 import { User } from './entities/user.entity';
 import { Nationality } from './entities/nationality.entity';
 import { PaginationQueryDto } from '@nestjs-fundamentals-boiler-temple/common';
@@ -6,25 +6,19 @@ import { DataSource, Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Event } from './events/entities/event.entity';
 import { CreateUserDto } from './dto/create-user.dto';
+import userConfig from './config/user.config';
+import { ConfigType } from '@nestjs/config';
 
 @Injectable()
 export class UserService {
-  private users: User[] = [
-    {
-      id: 1,
-      name: 'Shipwreck Roast',
-      sirname: 'Buddy Brew',
-      likes: 0,
-      nationalities: [{ id: 1, name: 'turkish', users: [] }] as Nationality[],
-    },
-  ];
-
   constructor(
     @InjectRepository(User)
     private readonly userRepository: Repository<User>,
     @InjectRepository(Nationality)
     private readonly nationalityRepository: Repository<Nationality>,
-    private readonly dataSource: DataSource
+    private readonly dataSource: DataSource,
+    @Inject(userConfig.KEY)
+    private usersConfiguration: ConfigType<typeof userConfig>
   ) {}
   findAll(paginationQuery: PaginationQueryDto) {
     const { limit, offset } = paginationQuery;
@@ -65,9 +59,11 @@ export class UserService {
   }
 
   remove(id: string) {
-    const userIndex = this.users.findIndex((item) => item.id === +id);
+    const userIndex = this.usersConfiguration.users.findIndex(
+      (item) => item.id === +id
+    );
     if (userIndex >= 0) {
-      this.users.splice(userIndex, 1);
+      this.usersConfiguration.users.splice(userIndex, 1);
     }
   }
 
