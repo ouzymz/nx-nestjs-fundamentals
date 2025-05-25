@@ -14,13 +14,17 @@ import {
 import { UserService } from './user.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
-import { PaginationQueryDto } from '@nestjs-fundamentals-boiler-temple/common';
+import {
+  PaginationQueryDto,
+  Public,
+} from '@nestjs-fundamentals-boiler-temple/common';
 
 @Controller('user')
 export class UserController {
   constructor(private readonly userService: UserService) {}
 
   @UsePipes(ValidationPipe)
+  @Public()
   @Get()
   async findAll(@Query() paginationQuery: PaginationQueryDto) {
     // await new Promise(resolve => setTimeout(resolve, 5000));
