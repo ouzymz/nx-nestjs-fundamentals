@@ -96,7 +96,11 @@ docker-compose up --build
 ├── apps/
 │   ├── api/           # Main NestJS application
 │   └── api-e2e/       # End-to-end tests
-├── libs/              # Shared libraries
+├── libs/              # Shared libraries  
+│   ├── user/          
+│   ├── common/             
+│   ├── user-rating/          
+│   └── database/         
 ├── docker/           # Docker configuration
 ```
 
